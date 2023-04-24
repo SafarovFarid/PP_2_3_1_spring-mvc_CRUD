@@ -23,24 +23,24 @@ public class UserController {
         return "user";
     }
 
-    @RequestMapping("/addNewUser")
+    @GetMapping("/addNewUser")
     public String addNewUser(ModelMap model) {
         model.addAttribute("user", new User());
         return "user-info";
 
     }
-    @RequestMapping("/saveUser")
+    @PostMapping("/saveUser")
     public String saveUser(@ModelAttribute("user") User user) {
         userService.createUser(user);
         return "redirect:/";
     }
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/update/{id}")
     public String update(@PathVariable("id") long id, ModelMap model) {
         User user = userService.getUser(id);
         model.addAttribute("user", user);
         return "user-info";
     }
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/delete/{id}")
     public String delete(@PathVariable("id") long id) {
         userService.deleteUser(id);
         return "redirect:/";

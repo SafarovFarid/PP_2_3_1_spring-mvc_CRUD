@@ -17,10 +17,14 @@ public class UserServiceImpl implements UserService{
         this.userDao = userDao;
     }
 
-    @Transactional
+
     @Override
     public List<User> getAllUsers() {
         return userDao.getAllUsers();
+    }
+    @Override
+    public User getUser(long id){
+        return userDao.getUser(id);
     }
     @Transactional
     @Override
@@ -38,9 +42,6 @@ public class UserServiceImpl implements UserService{
         return userDao.deleteUser(id);
     }
 
-    @Transactional
-    @Override
-    public User getUser(long id){
-        return userDao.getUser(id);
-    }
+
+
 }
