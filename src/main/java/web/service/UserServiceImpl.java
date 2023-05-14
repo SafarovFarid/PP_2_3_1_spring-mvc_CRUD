@@ -29,12 +29,15 @@ public class UserServiceImpl implements UserService{
     @Transactional
     @Override
     public void createUser(User user) {
-        if(user.getId() == 0) {
-            userDao.createUser(user);
-        } else {
-            userDao.updateUser(user);
-        }
+        userDao.createUser(user);
 
+
+    }
+
+    @Transactional
+    @Override
+    public void updateUser(User user) {
+        userDao.updateUser(user);
     }
     @Transactional
     @Override

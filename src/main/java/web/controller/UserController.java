@@ -20,6 +20,7 @@ public class UserController {
     @GetMapping("/")
     public String users(ModelMap model) {
         model.addAttribute("users",userService.getAllUsers());
+        System.out.println(userService.getAllUsers());
         return "user";
     }
 
@@ -34,13 +35,23 @@ public class UserController {
         userService.createUser(user);
         return "redirect:/";
     }
+
     @GetMapping(value = "/update/{id}")
     public String update(@PathVariable("id") long id, ModelMap model) {
         User user = userService.getUser(id);
         model.addAttribute("user", user);
-        return "user-info";
+        return "user-update";
     }
-    @GetMapping(value = "/delete/{id}")
+
+    @PutMapping("/{id}")
+    public String updateUser(@ModelAttribute("user") User user, @PathVariable("id") long id) {
+        user.setId(id);
+        userService.updateUser(user);
+        return "redirect:/";
+    }
+
+
+    @DeleteMapping(value = "/delete/{id}")
     public String delete(@PathVariable("id") long id) {
         userService.deleteUser(id);
         return "redirect:/";
